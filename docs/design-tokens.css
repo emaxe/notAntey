@@ -1,0 +1,148 @@
+/*
+  notAntey — Design Tokens as CSS Custom Properties
+  Based on Airbnb generous marketplace patterns.
+  To re-brand: edit the hex values inside :root, leave variable names untouched.
+  Tailwind config maps class names (e.g. bg-primary, text-ink) to these vars.
+*/
+
+:root {
+  /* === Brand & Accent === */
+  --color-primary: #ff385c;
+  --color-primary-active: #e00b41;
+  --color-primary-disabled: #ffd1da;
+  --color-primary-error-text: #c13515;
+  --color-primary-error-text-hover: #b32505;
+
+  /* Sub-brand accents (rarely used, kept for completeness) */
+  --color-luxe: #460479;
+  --color-plus: #92174d;
+
+  /* === Surface === */
+  --color-canvas: #ffffff;
+  --color-surface-soft: #f7f7f7;
+  --color-surface-card: #ffffff;
+  --color-surface-strong: #f2f2f2;
+
+  /* === Hairlines & Borders === */
+  --color-hairline: #dddddd;
+  --color-hairline-soft: #ebebeb;
+  --color-border-strong: #c1c1c1;
+
+  /* === Text === */
+  --color-ink: #222222;
+  --color-body: #3f3f3f;
+  --color-muted: #6a6a6a;
+  --color-muted-soft: #929292;
+  --color-star-rating: #222222;
+  --color-on-primary: #ffffff;
+  --color-on-dark: #ffffff;
+  --color-legal-link: #428bff;
+
+  /* === Scrim / Modal backdrop === */
+  --color-scrim: #000000;
+  --scrim-opacity: 0.5;
+
+  /* === Semantic aliases === */
+  --text-default: var(--color-ink);
+  --text-secondary: var(--color-body);
+  --text-muted: var(--color-muted);
+  --bg-page: var(--color-canvas);
+  --bg-card: var(--color-surface-card);
+  --border-default: var(--color-hairline);
+
+  /* === Typography === */
+  --font-sans: Inter, -apple-system, system-ui, Roboto, "Helvetica Neue", sans-serif;
+  --font-mono: "SF Mono", SFMono-Regular, ui-monospace, monospace;
+
+  --text-display-xl: 28px;
+  --text-display-lg: 22px;
+  --text-display-md: 21px;
+  --text-display-sm: 20px;
+  --text-title-md: 16px;
+  --text-title-sm: 16px;
+  --text-rating-display: 64px;
+  --text-body-md: 16px;
+  --text-body-sm: 14px;
+  --text-caption: 14px;
+  --text-caption-sm: 13px;
+  --text-badge: 11px;
+  --text-micro: 12px;
+  --text-uppercase-tag: 8px;
+  --text-button-md: 16px;
+  --text-button-sm: 14px;
+  --text-link: 14px;
+  --text-nav-link: 16px;
+
+  /* === Radius === */
+  --radius-none: 0px;
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 32px;
+  --radius-full: 9999px;
+
+  /* === Spacing === */
+  --space-xxs: 2px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-base: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-xxl: 48px;
+  --space-section: 64px;
+
+  /* === Component specifics === */
+  --button-primary-bg: var(--color-primary);
+  --button-primary-text: var(--color-on-primary);
+  --button-primary-radius: var(--radius-sm);
+  --button-primary-padding: 14px 24px;
+  --button-primary-height: 48px;
+
+  --button-secondary-bg: var(--color-canvas);
+  --button-secondary-text: var(--color-ink);
+  --button-secondary-border: 1px solid var(--color-ink);
+  --button-secondary-radius: var(--radius-sm);
+
+  --button-tertiary-text: var(--color-ink);
+
+  --button-pill-rausch-bg: var(--color-primary);
+  --button-pill-rausch-text: var(--color-on-primary);
+  --button-pill-rausch-radius: var(--radius-full);
+
+  --search-bar-bg: var(--color-canvas);
+  --search-bar-radius: var(--radius-full);
+  --search-bar-height: 64px;
+  --search-bar-border: 1px solid var(--color-hairline);
+  --search-bar-padding: 14px 24px;
+  --search-orb-bg: var(--color-primary);
+  --search-orb-text: var(--color-on-primary);
+  --search-orb-radius: var(--radius-full);
+  --search-orb-height: 48px;
+
+  --icon-button-circle-bg: var(--color-surface-strong);
+  --icon-button-circle-text: var(--color-ink);
+  --icon-button-circle-radius: var(--radius-full);
+  --icon-button-circle-height: 32px;
+
+  --nav-height: 80px;
+  --nav-bg: var(--color-canvas);
+  --nav-border-bottom: 1px solid var(--color-hairline);
+
+  --card-bg: var(--color-surface-card);
+  --card-radius: var(--radius-md);
+  --card-padding: var(--space-base);
+
+  --footer-bg: var(--color-canvas);
+  --footer-padding: var(--space-section) var(--space-xl);
+  --footer-text: var(--color-ink);
+  --footer-link-text: var(--color-ink);
+  --legal-band-text: var(--color-muted);
+
+  /* === Shadow === */
+  --shadow-float:
+    0 0 0 1px rgba(0, 0, 0, 0.02),
+    0 2px 6px 0 rgba(0, 0, 0, 0.04),
+    0 4px 8px 0 rgba(0, 0, 0, 0.10);
+}
