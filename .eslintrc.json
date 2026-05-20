@@ -20,5 +20,22 @@
     ".next/",
     "out/",
     "dist/"
+  ],
+  "overrides": [
+    {
+      "files": ["**/*.test.{ts,tsx}", "**/*.spec.{ts,tsx}", "jest.setup.ts"],
+      "env": { "jest": true },
+      "globals": {
+        "describe": "readonly",
+        "it": "readonly",
+        "test": "readonly",
+        "expect": "readonly",
+        "beforeAll": "readonly",
+        "beforeEach": "readonly",
+        "afterAll": "readonly",
+        "afterEach": "readonly",
+        "jest": "readonly"
+      }
+    }
   ]
 }
