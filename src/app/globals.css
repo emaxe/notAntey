@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "../../docs/design-tokens.css";
+
+@layer base {
+  html {
+    color: var(--color-ink);
+    background-color: var(--color-canvas);
+  }
+}

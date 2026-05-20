@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "title": "Авторизованный сервис Apple",
+    "issuer": "Apple Inc.",
+    "date": "2023",
+    "description": "Официальная авторизация на ремонт и обслуживание устройств Apple: iPhone, iPad, MacBook, iMac.",
+    "image": "https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?w=800&h=600&fit=crop",
+    "validUntil": "2026"
+  },
+  {
+    "id": 2,
+    "title": "Apple Certified iOS Technician",
+    "issuer": "Apple Authorized Training Provider",
+    "date": "2023",
+    "description": "Сертифицированный специалист по диагностике и ремонту iOS-устройств: замена экранов, батарей, портов.",
+    "image": "https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?w=800&h=600&fit=crop",
+    "validUntil": "2026"
+  },
+  {
+    "id": 3,
+    "title": "Microsoft Certified: Modern Desktop Administrator",
+    "issuer": "Microsoft",
+    "date": "2022",
+    "description": "Администрирование Windows, деплой и обновление корпоративных парков устройств. Подготовка к переходу на Windows 11.",
+    "image": "https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=800&h=600&fit=crop",
+    "validUntil": "2025"
+  },
+  {
+    "id": 4,
+    "title": "CompTIA A+",
+    "issuer": "CompTIA",
+    "date": "2021",
+    "description": "Универсальный сертификат по обслуживанию ПК, ноутбуков, мобильных устройств. Аппаратная и программная диагностика.",
+    "image": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=600&fit=crop",
+    "validUntil": "2024"
+  },
+  {
+    "id": 5,
+    "title": "Samsung Service Engineer",
+    "issuer": "Samsung Electronics",
+    "date": "2022",
+    "description": "Авторизованное обучение по ремонту Galaxy-устройств: смартфонов, планшетов, ноутбуков серии Book.",
+    "image": "https://images.unsplash.com/photo-1610945265078-3858a082863a?w=800&h=600&fit=crop",
+    "validUntil": "2025"
+  },
+  {
+    "id": 6,
+    "title": "Сертификат инженера ASUS",
+    "issuer": "ASUS Tek Computer Inc.",
+    "date": "2021",
+    "description": "Сертификация по диагностике и ремонту ноутбуков, материнских плат, видеокарт ASUS и ROG-периферий.",
+    "image": "https://images.unsplash.com/photo-1593640408182-31c70c8268f5?w=800&h=600&fit=crop",
+    "validUntil": "2024"
+  }
+]

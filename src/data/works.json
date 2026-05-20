@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "title": "Замена матрицы MacBook Pro 16\" 2021",
+    "description": "Оригинальная Liquid Retina XDR, замена с сохранением True Tone и автокалибровкой цветов.",
+    "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=800&h=600&fit=crop",
+    "date": "2024-03-15",
+    "tags": ["Apple", "MacBook", "Дисплей"]
+  },
+  {
+    "id": 2,
+    "title": "Восстановление ноутбука после залития",
+    "description": "Полная разборка, ультразвуковая чистка платы, замена коррозированных элементов. Работает как новый.",
+    "image": "https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=800&h=600&fit=crop",
+    "date": "2024-03-10",
+    "tags": ["Ноутбук", "Восстановление", "Вода"]
+  },
+  {
+    "id": 3,
+    "title": "Замена клавиатуры ASUS ROG Strix",
+    "description": "Механическая клавиатура с RGB-подсветкой. Замена механизмов, калибровка подсветки.",
+    "image": "https://images.unsplash.com/photo-1593640408182-31c70c8268f5?w=800&h=600&fit=crop",
+    "date": "2024-02-28",
+    "tags": ["Ноутбук", "Игровой", "Клавиатура"]
+  },
+  {
+    "id": 4,
+    "title": "Ремонт iPhone 15 Pro — замена стекла",
+    "description": "Оригинальное Ceramic Shield, переклейка с сохранением Face ID и влагозащиты.",
+    "image": "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=800&h=600&fit=crop",
+    "date": "2024-02-20",
+    "tags": ["Apple", "iPhone", "Стекло"]
+  },
+  {
+    "id": 5,
+    "title": "Сборка игрового ПК под ключ",
+    "description": "Подбор комплектующих, сборка, тестирование стабильности, настройка RGB и разгона.",
+    "image": "https://images.unsplash.com/photo-1587202372634-32705e3e859e?w=800&h=600&fit=crop",
+    "date": "2024-02-15",
+    "tags": ["ПК", "Сборка", "Игровой"]
+  },
+  {
+    "id": 6,
+    "title": "Замена батареи iPad Pro 12.9\"",
+    "description": "Оригинальная батарея, сохранение водонепроницаемости, калибровка емкости.",
+    "image": "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=800&h=600&fit=crop",
+    "date": "2024-02-05",
+    "tags": ["Apple", "iPad", "Батарея"]
+  }
+]

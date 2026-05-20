@@ -1,41 +1,138 @@
-import Link from "next/link";
+"use client";
 
-export default function Footer() {
+import Link from "next/link";
+import { Phone, MapPin, Mail, Clock } from "lucide-react";
+
+const footerLinks = {
+  pages: [
+    { href: "/works", label: "Наши работы" },
+    { href: "/price", label: "Прайс" },
+    { href: "/features", label: "Наши фишки" },
+    { href: "/certificates", label: "Сертификаты" },
+  ],
+  services: [
+    { href: "/price", label: "Ремонт ноутбуков" },
+    { href: "/price", label: "Ремонт MacBook" },
+    { href: "/price", label: "Ремонт iPhone / iPad" },
+    { href: "/price", label: "Сборка ПК под ключ" },
+  ],
+};
+
+export function Footer() {
   return (
-    <footer className="border-t border-hairline bg-canvas px-base py-section">
-      <div className="mx-auto max-w-container-lg">
-        <div className="grid gap-xl md:grid-cols-3">
-          <div>
-            <h4 className="text-title-sm font-semibold text-ink mb-sm">КомпьютерщикЪ</h4>
-            <p className="text-body-sm text-muted">
-              Профессиональный сервисный центр ремонта цифровой техники.
-              Гарантия, оригинальные запчасти, выезд мастера.
+    <footer className="border-t bg-[var(--color-surface)] transition-colors duration-300">
+      <div className="mx-auto max-w-[var(--content-max-width)] px-[var(--container-padding-x)] py-16">
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4">
+          {/* Brand */}
+          <div className="space-y-4">
+            <span className="text-2xl font-extrabold tracking-tight text-[var(--color-primary)]">
+              КомпьютерщикЪ
+            </span>
+            <p className="text-sm leading-relaxed text-[var(--color-text-muted)]">
+              Профессиональный ремонт техники с 2015 года. Оригинальные
+              запчасти, гарантия, честные цены.
             </p>
           </div>
 
+          {/* Pages */}
           <div>
-            <h4 className="text-title-sm font-semibold text-ink mb-sm">Услуги</h4>
-            <ul className="flex flex-col gap-xs text-body-sm text-muted">
-              <li><Link href="/" className="hover:text-primary transition">Ремонт компьютеров</Link></li>
-              <li><Link href="/" className="hover:text-primary transition">Ремонт ноутбуков</Link></li>
-              <li><Link href="/" className="hover:text-primary transition">Apple ремонт</Link></li>
-              <li><Link href="/" className="hover:text-primary transition">Планшеты и гаджеты</Link></li>
+            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-[var(--color-text)]">
+              Разделы
+            </h3>
+            <ul className="space-y-2.5">
+              {footerLinks.pages.map((link) => (
+                <li key={link.href + link.label}>
+                  <Link
+                    href={link.href}
+                    className="text-sm text-[var(--color-text-muted)] transition-colors duration-200 hover:text-[var(--color-primary)]"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
+          {/* Services */}
           <div>
-            <h4 className="text-title-sm font-semibold text-ink mb-sm">Контакты</h4>
-            <ul className="flex flex-col gap-xs text-body-sm text-muted">
-              <li>Тел: <a href="tel:+71234567890" className="text-ink hover:text-primary transition">+7 (123) 456-78-90</a></li>
-              <li>Telegram: <a href="https://t.me/username" target="_blank" rel="noopener noreferrer" className="text-ink hover:text-primary transition">@username</a></li>
-              <li>Адрес: г. Москва, ул. Примерная, 1</li>
-              <li>Часы работы: ежедневно 10:00–20:00</li>
+            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-[var(--color-text)]">
+              Услуги
+            </h3>
+            <ul className="space-y-2.5">
+              {footerLinks.services.map((link) => (
+                <li key={link.href + link.label}>
+                  <Link
+                    href={link.href}
+                    className="text-sm text-[var(--color-text-muted)] transition-colors duration-200 hover:text-[var(--color-primary)]"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contacts */}
+          <div>
+            <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-[var(--color-text)]">
+              Контакты
+            </h3>
+            <ul className="space-y-3">
+              <li className="flex items-start gap-3">
+                <Phone className="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-primary)]" />
+                <a
+                  href="tel:+74951234567"
+                  className="text-sm text-[var(--color-text-muted)] transition-colors duration-200 hover:text-[var(--color-primary)]"
+                >
+                  +7 (495) 123-45-67
+                </a>
+              </li>
+              <li className="flex items-start gap-3">
+                <Mail className="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-primary)]" />
+                <a
+                  href="mailto:info@kompyutershik.ru"
+                  className="text-sm text-[var(--color-text-muted)] transition-colors duration-200 hover:text-[var(--color-primary)]"
+                >
+                  info@kompyutershik.ru
+                </a>
+              </li>
+              <li className="flex items-start gap-3">
+                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-primary)]" />
+                <span className="text-sm text-[var(--color-text-muted)]">
+                  Москва, ул. Техническая, 42
+                </span>
+              </li>
+              <li className="flex items-start gap-3">
+                <Clock className="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-primary)]" />
+                <span className="text-sm text-[var(--color-text-muted)]">
+                  Пн–Сб: 10:00 – 20:00
+                </span>
+              </li>
             </ul>
           </div>
         </div>
+      </div>
 
-        <div className="mt-xl border-t border-hairline-soft pt-lg text-center text-caption-sm text-muted-soft">
-          © {new Date().getFullYear()} КомпьютерщикЪ. Все права защищены.
+      {/* Bottom bar */}
+      <div className="border-t">
+        <div className="mx-auto flex max-w-[var(--content-max-width)] flex-col items-center justify-between gap-4 px-[var(--container-padding-x)] py-6 sm:flex-row">
+          <p className="text-xs text-[var(--color-text-muted)]">
+            © {new Date().getFullYear()} КомпьютерщикЪ. Все права защищены.
+          </p>
+          <div className="flex items-center gap-6">
+            <a
+              href="#"
+              className="text-xs text-[var(--color-text-muted)] transition-colors duration-200 hover:text-[var(--color-primary)]"
+            >
+              Политика конфиденциальности
+            </a>
+            <a
+              href="#"
+              className="text-xs text-[var(--color-text-muted)] transition-colors duration-200 hover:text-[var(--color-primary)]"
+            >
+              Условия использования
+            </a>
+          </div>
         </div>
       </div>
     </footer>
