@@ -1,0 +1,121 @@
+/*
+  notAntey — Retro Hybrid Theme (based on "КомпьютерщикЪ" business card)
+  Overrides design-tokens.css inside .retro-theme scope.
+  Admin panel remains untouched (no .retro-theme class).
+*/
+
+.retro-theme {
+  /* === Brand & Accent === */
+  --color-primary: #5e2d79;
+  --color-primary-active: #4a1d61;
+  --color-primary-disabled: #d8c4e0;
+  --color-primary-error-text: #9a2b2b;
+  --color-primary-error-text-hover: #7a1f1f;
+
+  /* === Surface (semi-transparent to show vintage texture) === */
+  --color-canvas: rgba(245, 240, 230, 0.75);
+  --color-surface-soft: rgba(236, 229, 216, 0.78);
+  --color-surface-card: rgba(253, 251, 247, 0.80);
+  --color-surface-strong: rgba(227, 219, 208, 0.78);
+
+  /* === Hairlines & Borders === */
+  --color-hairline: #c9bfb0;
+  --color-hairline-soft: #ddd5c8;
+  --color-border-strong: #a89a88;
+
+  /* === Text === */
+  --color-ink: #1c120b;
+  --color-body: #3d3028;
+  --color-muted: #6b5e52;
+  --color-muted-soft: #8a7d70;
+  --color-star-rating: #1c120b;
+  --color-on-primary: #ffffff;
+  --color-on-dark: #ffffff;
+  --color-legal-link: #5e2d79;
+
+  /* === Scrim / Modal backdrop === */
+  --color-scrim: #1c120b;
+  --scrim-opacity: 0.5;
+
+  /* === Semantic aliases === */
+  --text-default: var(--color-ink);
+  --text-secondary: var(--color-body);
+  --text-muted: var(--color-muted);
+  --bg-page: var(--color-canvas);
+  --bg-card: var(--color-surface-card);
+  --border-default: var(--color-hairline);
+
+  /* === Shadows (flat & warm, no heavy blur) === */
+  --shadow-sm: 0 1px 2px 0 rgb(28 18 11 / 0.06);
+  --shadow-md: 0 2px 8px 0 rgb(28 18 11 / 0.08);
+  --shadow-lg: 0 4px 12px 0 rgb(28 18 11 / 0.10);
+
+  --shadow-float:
+    0 1px 0 0 rgba(28, 18, 11, 0.08),
+    0 4px 12px 0 rgba(28, 18, 11, 0.10);
+
+  /* === Radius (squarish, closer to business card) === */
+  --radius-none: 0px;
+  --radius-xs: 2px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-full: 9999px;
+
+  /* === Component specifics === */
+  --button-primary-bg: var(--color-primary);
+  --button-primary-text: var(--color-on-primary);
+  --button-primary-radius: var(--radius-sm);
+
+  --button-secondary-bg: var(--color-surface-card);
+  --button-secondary-text: var(--color-ink);
+  --button-secondary-border: 1.5px solid var(--color-hairline);
+  --button-secondary-radius: var(--radius-sm);
+
+  --nav-bg: #f5f0e6;
+  --nav-border-bottom: 1px solid var(--color-hairline);
+
+  --card-bg: var(--color-surface-card);
+  --card-radius: var(--radius-sm);
+  --card-padding: var(--space-base);
+
+  --footer-bg: var(--color-canvas);
+}
+
+/* === Font display utility === */
+.retro-theme .font-display {
+  font-family: var(--font-display);
+  letter-spacing: 0.02em;
+  line-height: 1.15;
+}
+
+/* Apply display font to all headings inside retro-theme */
+.retro-theme h1,
+.retro-theme h2,
+.retro-theme h3,
+.retro-theme h4,
+.retro-theme h5,
+.retro-theme h6 {
+  font-family: var(--font-display);
+  letter-spacing: 0.02em;
+}
+
+/* === Ornate border for cards (inset highlight + border) === */
+.retro-theme .ornate-border {
+  border: 1.5px solid var(--color-hairline);
+  background-image: linear-gradient(
+    180deg,
+    var(--color-surface-card) 0%,
+    var(--color-surface-soft) 100%
+  );
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.5),
+    0 1px 0 0 rgba(28, 18, 11, 0.04);
+}
+
+/* === Hero subtle dot pattern background === */
+.retro-theme .hero-dot-pattern {
+  background-image: radial-gradient(circle at 1px 1px, rgb(28 18 11 / 0.04) 1px, transparent 0);
+  background-size: 24px 24px;
+}

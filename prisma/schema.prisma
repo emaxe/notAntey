@@ -1,0 +1,73 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Post {
+  id        String   @id @default(cuid())
+  title     String
+  slug      String   @unique
+  content   String
+  excerpt   String?
+  images    String[]
+  source    String   @default("manual")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model PriceCategory {
+  id        String      @id @default(cuid())
+  name      String
+  sortOrder Int         @default(0)
+  items     PriceItem[]
+}
+
+model PriceItem {
+  id         String        @id @default(cuid())
+  categoryId String
+  category   PriceCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  name       String
+  price      Int
+  unit       String        @default("руб.")
+  sortOrder  Int           @default(0)
+}
+
+model Certificate {
+  id        String   @id @default(cuid())
+  title     String
+  imageUrl  String
+  category  String?
+  createdAt DateTime @default(now())
+}
+
+model Feature {
+  id          String  @id @default(cuid())
+  title       String
+  description String
+  icon        String  @default("Star")
+  mediaUrl    String?
+  sortOrder   Int     @default(0)
+}
+
+model BlogPost {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  content     String
+  excerpt     String?
+  coverImage  String?
+  images      String[]
+  published   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model User {
+  id           String @id @default(cuid())
+  email        String @unique
+  passwordHash String
+  role         String @default("admin")
+}

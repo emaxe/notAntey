@@ -2,11 +2,52 @@
 @tailwind components;
 @tailwind utilities;
 
+/* === Local heading font (Brokgauz & Efron) === */
+@font-face {
+  font-family: 'HeadingFont';
+  src: url('/fonts/heading.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --font-display: 'HeadingFont', serif;
+}
+
 @import "../../docs/design-tokens.css";
+@import "../../src/styles/retro-theme.css";
 
 @layer base {
   html {
     color: var(--color-ink);
     background-color: var(--color-canvas);
+    scroll-behavior: smooth;
+  }
+  body {
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    position: relative;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: url('/vintage-texture.webp') center/cover no-repeat;
+    opacity: 0.4;
+    pointer-events: none;
+    z-index: 0;
+  }
+  body > * {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+@layer components {
+  /* Container utility that mirrors the max-width + padding pattern used everywhere */
+  .container-page {
+    @apply mx-auto max-w-container-lg px-4 md:px-8 lg:px-12 xl:px-16;
   }
 }

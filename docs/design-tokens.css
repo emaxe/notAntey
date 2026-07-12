@@ -73,6 +73,26 @@
   --text-link: 14px;
   --text-nav-link: 16px;
 
+  /* === Layout === */
+  --content-max-width: 1280px;
+  --container-padding-x: 16px;
+  --header-height: 72px;
+
+  /* === Missing semantic colors (mapped from existing tokens) === */
+  --color-surface: #ffffff;
+  --color-surface-hover: #f7f7f7;
+  --color-border: #ebebeb;
+  --color-text: #222222;
+  --color-text-inverse: #ffffff;
+  --color-text-muted: #6a6a6a;
+  --color-accent: #fff0f3;
+  --color-primary-ghost: #fff0f3;
+
+  /* === Shadows === */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+
   /* === Radius === */
   --radius-none: 0px;
   --radius-xs: 4px;

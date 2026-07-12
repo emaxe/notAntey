@@ -1,7 +1,6 @@
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
-import type { ComponentType, CSSProperties } from "react";
 import {
+  Home,
   Shield,
   Cpu,
   Zap,
@@ -11,9 +10,9 @@ import {
   Sparkles,
   FileCheck,
 } from "lucide-react";
-import features from "@/data/features.json";
+import OrnamentalDivider from "@/components/OrnamentalDivider";
 
-const iconMap: Record<string, ComponentType<{ className?: string; style?: CSSProperties }>> = {
+const iconMap: Record<string, any> = {
   Shield,
   Cpu,
   Zap,
@@ -24,68 +23,81 @@ const iconMap: Record<string, ComponentType<{ className?: string; style?: CSSPro
   FileCheck,
 };
 
+async function getFeatures() {
+  const API_BASE = process.env.APP_URL || '';
+  const res = await fetch(`${API_BASE}/api/features`, {
+    next: { revalidate: 300 },
+  });
+  if (!res.ok) return [];
+  return res.json();
+}
+
 export const metadata = {
   title: "Наши фишки — КомпьютерщикЪ",
   description:
     "Честные цены, оригинальные запчасти, гарантия на всё, выезд мастера и бесплатная диагностика. Вот почему к нам возвращаются.",
 };
 
-export default function FeaturesPage() {
-  return (
-    <div className="mx-auto max-w-[var(--content-max-width)] px-[var(--container-padding-x)] py-12 md:py-20">
-      <Link
-        href="/"
-        className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-[var(--color-primary)] transition-opacity hover:opacity-80"
-      >
-        <ArrowLeft className="h-4 w-4" />
-        На главную
-      </Link>
+export default async function FeaturesPage() {
+  const features = await getFeatures();
 
-      <h1 className="mb-4 text-3xl font-extrabold tracking-tight md:text-4xl lg:text-5xl">
+  return (
+    <div className="mx-auto max-w-container-lg px-4 md:px-8 lg:px-12 xl:px-16 py-12 md:py-20">
+      {/* Breadcrumb */}
+      <nav className="mb-8 flex items-center gap-2 text-sm text-[var(--color-muted)]">
+        <Link href="/" className="inline-flex items-center gap-1 transition-colors hover:text-[var(--color-primary)]">
+          <Home className="h-4 w-4" />
+          Главная
+        </Link>
+        <span>/</span>
+        <span className="text-[var(--color-ink)] font-medium">Наши фишки</span>
+      </nav>
+
+      <h1
+        className="mb-4 text-3xl font-extrabold tracking-tight md:text-4xl lg:text-5xl text-[var(--color-ink)]"
+        style={{ fontFamily: "var(--font-display), serif" }}
+      >
         Наши фишки
       </h1>
-      <p className="mb-12 max-w-2xl text-lg text-[var(--color-text-muted)]">
+      <OrnamentalDivider className="mb-8 justify-start" />
+      <p className="mb-12 max-w-2xl text-lg text-[var(--color-muted)] leading-relaxed">
         То, за что нас выбирают и к чему возвращаются. Без пустых слов — только то,
         что реально работает на вашу пользу.
       </p>
 
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {features.map((feature) => {
-          const Icon = iconMap[feature.icon] || Shield;
-          return (
-            <div
-              key={feature.id}
-              className="flex flex-col rounded-2xl border bg-[var(--color-surface)] p-6 shadow-[var(--shadow-sm)] transition-all duration-300 hover:shadow-[var(--shadow-md)] hover:-translate-y-1"
-            >
-              <div
-                className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl"
-                style={{
-                  backgroundColor:
-                    feature.accent === "accent"
-                      ? "var(--color-accent)"
-                      : "var(--color-primary-ghost)",
-                }}
-              >
-                <Icon
-                  className="h-6 w-6"
-                  style={{
-                    color:
-                      feature.accent === "accent"
-                        ? "var(--color-primary)"
-                        : "var(--color-primary)",
-                  }}
-                />
+        {features.map((feature: any) => (
+          <div
+            key={feature.id}
+            className="flex flex-col border border-[var(--color-hairline)] bg-[var(--color-surface-card)] p-6 transition-all duration-300 hover:border-[var(--color-primary)]/40"
+          >
+            {feature.mediaUrl ? (
+              <div className="mb-4 h-12 w-12 overflow-hidden">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={feature.mediaUrl} alt="" className="h-full w-full object-cover" />
               </div>
-              <h2 className="mb-2 text-lg font-bold leading-snug">
-                {feature.title}
-              </h2>
-              <p className="text-sm leading-relaxed text-[var(--color-text-muted)]">
-                {feature.description}
-              </p>
-            </div>
-          );
-        })}
+            ) : (
+              <div className="mb-4 inline-flex h-12 w-12 items-center justify-center border bg-[var(--color-surface-soft)]">
+                {(() => {
+                  const Icon = iconMap[feature.icon] || Shield;
+                  return <Icon className="h-6 w-6 text-[var(--color-primary)]" />;
+                })()}
+              </div>
+            )}
+            <h2 className="mb-2 text-lg font-bold leading-snug text-[var(--color-ink)]">{feature.title}</h2>
+            <p className="text-sm leading-relaxed text-[var(--color-muted)]">
+              {feature.description}
+            </p>
+          </div>
+        ))}
       </div>
+
+      {features.length === 0 && (
+        <div className="flex flex-col items-center justify-center py-20 text-[var(--color-muted)]">
+          <p className="text-lg">Фишки пока не заполнены</p>
+          <p className="text-sm mt-2">Загляните позже — мы расскажем, почему мы лучшие</p>
+        </div>
+      )}
     </div>
   );
 }

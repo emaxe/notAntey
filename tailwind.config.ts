@@ -55,12 +55,14 @@ const config: Config = {
       fontFamily: {
         sans: ["Inter", "-apple-system", "system-ui", "Roboto", "Helvetica Neue", "sans-serif"],
         mono: ["SF Mono", "SFMono-Regular", "ui-monospace", "monospace"],
+        display: ["var(--font-ruslan)", "serif"],
       },
       fontSize: {
         "display-xl": ["var(--text-display-xl)", { lineHeight: "1.2", fontWeight: "700" }],
         "display-lg": ["var(--text-display-lg)", { lineHeight: "1.25" }],
         "display-md": ["var(--text-display-md)", { lineHeight: "1.3" }],
         "display-sm": ["var(--text-display-sm)", { lineHeight: "1.35" }],
+        "rating-display": ["var(--text-rating-display)", { lineHeight: "1.1", fontWeight: "700" }],
         "title-md": ["var(--text-title-md)", { lineHeight: "1.4" }],
         "body-md": ["var(--text-body-md)", { lineHeight: "1.5" }],
         "body-sm": ["var(--text-body-sm)", { lineHeight: "1.5" }],
@@ -72,6 +74,7 @@ const config: Config = {
       },
       boxShadow: {
         float: "var(--shadow-float)",
+        soft: "0 4px 20px -4px rgba(0,0,0,0.08)",
       },
       height: {
         nav: "var(--nav-height)",
@@ -84,6 +87,15 @@ const config: Config = {
     },
   },
   plugins: [],
+  keyframes: {
+    "slide-up": {
+      "0%": { opacity: "0", transform: "translateY(10px)" },
+      "100%": { opacity: "1", transform: "translateY(0)" },
+    },
+  },
+  animation: {
+    "slide-up": "slide-up 0.3s ease-out",
+  },
 };
 
 export default config;

@@ -1,25 +1,38 @@
 "use client";
 
-import { Phone, MessageCircle, ShieldCheck, Wrench, Truck } from "lucide-react";
+import { Phone, MessageCircle, ShieldCheck, Wrench, Truck, ArrowRight } from "lucide-react";
+import OrnamentalDivider from "./OrnamentalDivider";
 
 export default function HeroSection() {
   return (
-    <section className="relative overflow-hidden px-base py-section">
-      <div className="mx-auto max-w-container-lg">
-        <div className="flex flex-col items-start gap-lg md:w-2/3">
-          <h1 className="text-display-xl md:text-display-xl text-ink">
+    <section className="relative overflow-hidden bg-[var(--color-canvas)] hero-dot-pattern px-4 md:px-8 lg:px-12 xl:px-16 py-section md:py-24 lg:py-32">
+      <div className="relative mx-auto max-w-container-lg">
+        <div className="flex flex-col items-center gap-lg md:w-2/3 lg:w-3/5 mx-auto text-center">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 border border-[var(--color-hairline)] bg-[var(--color-surface-card)] px-4 py-1.5 text-sm font-semibold text-[var(--color-primary)]">
+            <ShieldCheck className="h-4 w-4" />
+            Гарантия до 12 месяцев
+          </div>
+
+          <h1
+            className="text-display-xl md:text-display-xl lg:text-[46px] font-bold text-[var(--color-ink)] leading-[1.15]"
+            style={{ fontFamily: "var(--font-display), serif" }}
+          >
             Профессиональный ремонт компьютеров и гаджетов
           </h1>
-          <p className="text-body-md text-muted max-w-container-sm">
+
+          <OrnamentalDivider />
+
+          <p className="text-body-md md:text-lg text-[var(--color-muted)] max-w-container-sm leading-relaxed">
             Сервисный центр «КомпьютерщикЪ» — ремонт ноутбуков, планшетов,
             моноблоков и техники Apple с гарантией до 12 месяцев.
             Сертифицированные мастера и оригинальные запчасти.
           </p>
 
-          <div className="flex flex-wrap gap-sm">
+          <div className="flex flex-wrap gap-sm justify-center">
             <a
               href="tel:+71234567890"
-              className="inline-flex items-center gap-xs rounded-sm bg-primary px-xl py-sm text-button-md font-medium text-on-primary transition hover:bg-primary-active hover:shadow-float"
+              className="inline-flex items-center gap-xs bg-[var(--color-primary)] px-xl py-sm text-button-md font-medium text-white transition hover:bg-[var(--color-primary-active)] hover:shadow-md"
               data-testid="hero-call-button"
             >
               <Phone size={18} />
@@ -29,24 +42,25 @@ export default function HeroSection() {
               href="https://t.me/username"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-xs rounded-sm border border-ink bg-canvas px-xl py-sm text-button-md font-medium text-ink transition hover:bg-surface-soft"
+              className="inline-flex items-center gap-xs border border-[var(--color-ink)] bg-[var(--color-canvas)] px-xl py-sm text-button-md font-medium text-[var(--color-ink)] transition hover:bg-[var(--color-surface-soft)] group"
             >
               <MessageCircle size={18} />
               Написать в Telegram
+              <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
             </a>
           </div>
 
-          <div className="mt-sm flex flex-wrap gap-xl">
-            <div className="flex items-center gap-xs text-caption text-muted">
-              <ShieldCheck size={18} className="text-primary" />
+          <div className="mt-sm flex flex-wrap gap-xl justify-center">
+            <div className="flex items-center gap-xs text-caption text-[var(--color-muted)]">
+              <ShieldCheck size={18} className="text-[var(--color-primary)] shrink-0" />
               Гарантия до 12 мес.
             </div>
-            <div className="flex items-center gap-xs text-caption text-muted">
-              <Wrench size={18} className="text-primary" />
+            <div className="flex items-center gap-xs text-caption text-[var(--color-muted)]">
+              <Wrench size={18} className="text-[var(--color-primary)] shrink-0" />
               Сертифицированные мастера
             </div>
-            <div className="flex items-center gap-xs text-caption text-muted">
-              <Truck size={18} className="text-primary" />
+            <div className="flex items-center gap-xs text-caption text-[var(--color-muted)]">
+              <Truck size={18} className="text-[var(--color-primary)] shrink-0" />
               Выезд и диагностика
             </div>
           </div>
