@@ -39,7 +39,7 @@ export default async function PricePage() {
         Прайс
       </h1>
       <OrnamentalDivider className="mb-8 justify-start" />
-      <p className="mb-12 max-w-2xl text-lg text-[var(--color-muted)] leading-relaxed">
+      <p className="vintage-text-block mb-12 max-w-2xl text-lg text-[var(--color-muted)] leading-relaxed">
         Прозрачные цены без скрытых доплат. Диагностика бесплатна, если делаете ремонт у нас.
         Сроки указаны ориентировочно и зависят от наличия запчастей.
       </p>
@@ -50,7 +50,7 @@ export default async function PricePage() {
             <h2 className="mb-6 text-xl font-bold tracking-tight md:text-2xl text-[var(--color-ink)]">
               {category.name}
             </h2>
-            <div className="overflow-hidden border border-[var(--color-hairline)] bg-[var(--color-surface-card)]">
+            <div className="overflow-hidden border border-[var(--color-hairline)] bg-[var(--color-surface-card)] rounded-[var(--radius-md)]">
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-sm">
                   <thead className="border-b border-[var(--color-hairline)] bg-[var(--color-surface-soft)]">
@@ -89,7 +89,7 @@ export default async function PricePage() {
         </div>
       )}
 
-      <div className="mt-12 border border-[var(--color-hairline)] bg-[var(--color-surface-soft)] p-6 md:p-8">
+      <div className="mt-12 border border-[var(--color-hairline)] bg-[var(--color-surface-soft)] rounded-[var(--radius-md)] p-6 md:p-8">
         <h3 className="mb-2 text-lg font-bold text-[var(--color-ink)]">Не нашли нужную услугу?</h3>
         <p className="mb-4 text-[var(--color-muted)]">
           Свяжитесь с нами — мы рассчитаем стоимость ремонта вашего устройства индивидуально.
@@ -98,7 +98,7 @@ export default async function PricePage() {
           href="https://t.me/max_username"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 bg-[var(--color-primary)] px-6 py-2.5 text-sm font-semibold text-[var(--color-on-primary)] transition-all duration-200 hover:opacity-90 group"
+          className="inline-flex items-center gap-2 bg-[var(--color-primary)] rounded-[var(--radius-lg)] px-6 py-2.5 text-sm font-semibold text-[var(--color-on-primary)] transition-all duration-200 hover:opacity-90 group"
         >
           Написать в Max
           <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />

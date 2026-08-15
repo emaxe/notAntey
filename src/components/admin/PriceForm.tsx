@@ -33,6 +33,7 @@ export default function PriceForm({ category, onSuccess, onCancel }: Props) {
       : [{ name: "", price: "", sortOrder: 0 }],
   });
   const [saving, setSaving] = useState(false);
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
 
   const setItem = (idx: number, field: keyof PriceItem, value: string | number) => {
     const next = [...form.items];
@@ -53,13 +54,14 @@ export default function PriceForm({ category, onSuccess, onCancel }: Props) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setFieldErrors({});
     setSaving(true);
     const payload = {
       name: form.name,
       sortOrder: form.sortOrder,
       items: form.items.map((i) => ({
         name: i.name,
-        price: i.price,
+        price: Number(i.price) || 0,
         sortOrder: i.sortOrder,
       })),
     };
@@ -74,7 +76,18 @@ export default function PriceForm({ category, onSuccess, onCancel }: Props) {
     });
     setSaving(false);
     if (res.ok) { onSuccess(); showToast("Сохранено", "success"); }
-    else showToast("Ошибка сохранения", "error");
+    else {
+      const data = await res.json().catch(() => ({}));
+      if (data?.error?.fieldErrors) {
+        const flat: Record<string, string> = {};
+        for (const [k, v] of Object.entries(data.error.fieldErrors)) {
+          flat[k] = Array.isArray(v) ? v[0] : String(v);
+        }
+        setFieldErrors(flat);
+      } else {
+        showToast(data?.error || "Ошибка сохранения", "error");
+      }
+    }
   };
 
   return (
@@ -83,10 +96,11 @@ export default function PriceForm({ category, onSuccess, onCancel }: Props) {
         <label className="block text-sm font-medium">Название категории</label>
         <input
           required
-          className="mt-1 w-full rounded border px-3 py-2"
+          className={`mt-1 w-full rounded border px-3 py-2 ${fieldErrors.name ? "border-red-500" : ""}`}
           value={form.name}
           onChange={(e) => setForm({ ...form, name: e.target.value })}
         />
+        {fieldErrors.name && <p className="mt-1 text-sm text-red-600">{fieldErrors.name}</p>}
       </div>
       <div>
         <label className="block text-sm font-medium">Sort order</label>

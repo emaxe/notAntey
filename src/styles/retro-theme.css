@@ -2,6 +2,9 @@
   notAntey — Retro Hybrid Theme (based on "КомпьютерщикЪ" business card)
   Overrides design-tokens.css inside .retro-theme scope.
   Admin panel remains untouched (no .retro-theme class).
+  
+  Vintage aesthetic: warm tones, soft rounded corners, sepia shadows,
+  vignette edges, aged-paper card effects.
 */
 
 .retro-theme {
@@ -15,7 +18,7 @@
   /* === Surface (semi-transparent to show vintage texture) === */
   --color-canvas: rgba(245, 240, 230, 0.75);
   --color-surface-soft: rgba(236, 229, 216, 0.78);
-  --color-surface-card: rgba(253, 251, 247, 0.80);
+  --color-surface-card: rgba(253, 251, 247, 0.82);
   --color-surface-strong: rgba(227, 219, 208, 0.78);
 
   /* === Hairlines & Borders === */
@@ -45,48 +48,49 @@
   --bg-card: var(--color-surface-card);
   --border-default: var(--color-hairline);
 
-  /* === Shadows (flat & warm, no heavy blur) === */
-  --shadow-sm: 0 1px 2px 0 rgb(28 18 11 / 0.06);
-  --shadow-md: 0 2px 8px 0 rgb(28 18 11 / 0.08);
-  --shadow-lg: 0 4px 12px 0 rgb(28 18 11 / 0.10);
+  /* === Shadows — warm sepia-toned, more diffuse === */
+  --shadow-sm: 0 1px 3px 0 rgb(60 40 20 / 0.08), 0 1px 2px -1px rgb(60 40 20 / 0.06);
+  --shadow-md: 0 4px 12px -2px rgb(60 40 20 / 0.10), 0 2px 4px -2px rgb(60 40 20 / 0.06);
+  --shadow-lg: 0 10px 24px -4px rgb(60 40 20 / 0.12), 0 4px 8px -4px rgb(60 40 20 / 0.06);
 
   --shadow-float:
-    0 1px 0 0 rgba(28, 18, 11, 0.08),
-    0 4px 12px 0 rgba(28, 18, 11, 0.10);
+    0 0 0 1px rgba(60, 40, 20, 0.04),
+    0 4px 16px -2px rgba(60, 40, 20, 0.12),
+    0 8px 24px -4px rgba(60, 40, 20, 0.08);
 
-  /* === Radius (squarish, closer to business card) === */
+  /* === Radius — subtle vintage softness === */
   --radius-none: 0px;
   --radius-xs: 2px;
   --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 14px;
-  --radius-xl: 20px;
+  --radius-md: 9px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
   --radius-full: 9999px;
 
   /* === Component specifics === */
   --button-primary-bg: var(--color-primary);
   --button-primary-text: var(--color-on-primary);
-  --button-primary-radius: var(--radius-sm);
+  --button-primary-radius: var(--radius-lg);
 
   --button-secondary-bg: var(--color-surface-card);
   --button-secondary-text: var(--color-ink);
   --button-secondary-border: 1.5px solid var(--color-hairline);
-  --button-secondary-radius: var(--radius-sm);
+  --button-secondary-radius: var(--radius-lg);
 
   --nav-bg: #f5f0e6;
   --nav-border-bottom: 1px solid var(--color-hairline);
 
   --card-bg: var(--color-surface-card);
-  --card-radius: var(--radius-sm);
-  --card-padding: var(--space-base);
+  --card-radius: var(--radius-md);
+  --card-padding: var(--space-lg);
 
-  --footer-bg: var(--color-canvas);
+  --footer-bg: rgba(236, 229, 216, 0.90);
 }
 
 /* === Font display utility === */
 .retro-theme .font-display {
   font-family: var(--font-display);
-  letter-spacing: 0.02em;
+  letter-spacing: 0.03em;
   line-height: 1.15;
 }
 
@@ -98,24 +102,84 @@
 .retro-theme h5,
 .retro-theme h6 {
   font-family: var(--font-display);
-  letter-spacing: 0.02em;
+  letter-spacing: 0.03em;
 }
 
-/* === Ornate border for cards (inset highlight + border) === */
+/* === Aged paper card effect === */
 .retro-theme .ornate-border {
   border: 1.5px solid var(--color-hairline);
-  background-image: linear-gradient(
-    180deg,
-    var(--color-surface-card) 0%,
-    var(--color-surface-soft) 100%
-  );
+  border-radius: var(--radius-md);
+  background-image:
+    linear-gradient(180deg, var(--color-surface-card) 0%, var(--color-surface-soft) 100%);
   box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.5),
-    0 1px 0 0 rgba(28, 18, 11, 0.04);
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.6),
+    inset 0 -1px 0 0 rgba(60, 40, 20, 0.04),
+    0 2px 8px -2px rgba(60, 40, 20, 0.10);
 }
 
 /* === Hero subtle dot pattern background === */
 .retro-theme .hero-dot-pattern {
   background-image: radial-gradient(circle at 1px 1px, rgb(28 18 11 / 0.04) 1px, transparent 0);
   background-size: 24px 24px;
+}
+
+/* === Vignette overlay — dark edges like an old photograph === */
+.retro-theme body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 50%,
+    rgba(28, 18, 11, 0.15) 100%
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* === Section dividers — subtle warm gradient between sections === */
+.retro-theme section + section {
+  border-top: 1px solid var(--color-hairline-soft);
+}
+
+/* === Aged card effect for generic cards === */
+.retro-theme [class*="rounded-xl"],
+.retro-theme [class*="rounded-lg"] {
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.5),
+    0 2px 8px -2px rgba(60, 40, 20, 0.10);
+}
+
+/* === Vintage text block — readable background for text on texture === */
+.retro-theme .vintage-text-block {
+  background: var(--color-surface-card);
+  border: 1px solid var(--color-hairline-soft);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg) var(--space-xl);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.5),
+    0 1px 4px -1px rgba(60, 40, 20, 0.08);
+}
+
+/* === Sepia tint on images (subtle) === */
+.retro-theme img:not([class*="no-sepia"]) {
+  filter: sepia(0.08) saturate(0.95);
+  transition: filter 0.3s ease;
+}
+.retro-theme img:not([class*="no-sepia"]):hover {
+  filter: sepia(0) saturate(1);
+}
+
+/* === Footer vintage style === */
+.retro-theme footer {
+  background: var(--footer-bg);
+  border-top: 1px solid var(--color-hairline);
+  color: var(--color-body);
+}
+.retro-theme footer a {
+  color: var(--color-primary);
+  transition: color 0.2s;
+}
+.retro-theme footer a:hover {
+  color: var(--color-primary-active);
 }

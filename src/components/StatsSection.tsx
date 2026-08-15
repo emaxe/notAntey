@@ -24,7 +24,7 @@ export default function StatsSection() {
                   !isLastRowMobile ? "border-b border-[var(--color-hairline)] md:border-b-0" : ""
                 }`}
               >
-                <div className="flex h-10 w-10 md:h-12 md:w-12 items-center justify-center border border-[var(--color-hairline)] bg-[var(--color-surface-card)] text-[var(--color-primary)]">
+                <div className="flex h-10 w-10 md:h-12 md:w-12 items-center justify-center border border-[var(--color-hairline)] bg-[var(--color-surface-card)] rounded-[var(--radius-sm)] text-[var(--color-primary)]">
                   <Icon className="h-4 w-4 md:h-5 md:w-5" />
                 </div>
                 <span className="text-3xl md:text-rating-display font-bold text-[var(--color-primary)] leading-none">

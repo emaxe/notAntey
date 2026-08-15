@@ -60,7 +60,7 @@ export default async function FeaturesPage() {
         Наши фишки
       </h1>
       <OrnamentalDivider className="mb-8 justify-start" />
-      <p className="mb-12 max-w-2xl text-lg text-[var(--color-muted)] leading-relaxed">
+      <p className="vintage-text-block mb-12 max-w-2xl text-lg text-[var(--color-muted)] leading-relaxed">
         То, за что нас выбирают и к чему возвращаются. Без пустых слов — только то,
         что реально работает на вашу пользу.
       </p>
@@ -69,7 +69,7 @@ export default async function FeaturesPage() {
         {features.map((feature: any) => (
           <div
             key={feature.id}
-            className="flex flex-col border border-[var(--color-hairline)] bg-[var(--color-surface-card)] p-6 transition-all duration-300 hover:border-[var(--color-primary)]/40"
+            className="flex flex-col border border-[var(--color-hairline)] bg-[var(--color-surface-card)] rounded-[var(--radius-md)] p-6 transition-all duration-300 hover:border-[var(--color-primary)]/40"
           >
             {feature.mediaUrl ? (
               <div className="mb-4 h-12 w-12 overflow-hidden">

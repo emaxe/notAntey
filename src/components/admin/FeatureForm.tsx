@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useToast } from "./Toast";
+import ImagePreview from "./ImagePreview";
 
 interface Feature {
   id?: string;
@@ -26,14 +27,16 @@ export default function FeatureForm({ feature, onSuccess, onCancel }: Props) {
     sortOrder: feature?.sortOrder ?? 0,
   });
   const [saving, setSaving] = useState(false);
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setFieldErrors({});
     setSaving(true);
     const payload = {
       title: form.title,
       description: form.description,
-      image: form.mediaUrl,
+      mediaUrl: form.mediaUrl,
       sortOrder: form.sortOrder,
     };
     const url = feature?.id
@@ -47,7 +50,18 @@ export default function FeatureForm({ feature, onSuccess, onCancel }: Props) {
     });
     setSaving(false);
     if (res.ok) { onSuccess(); showToast("Сохранено", "success"); }
-    else showToast("Ошибка сохранения", "error");
+    else {
+      const data = await res.json().catch(() => ({}));
+      if (data?.error?.fieldErrors) {
+        const flat: Record<string, string> = {};
+        for (const [k, v] of Object.entries(data.error.fieldErrors)) {
+          flat[k] = Array.isArray(v) ? v[0] : String(v);
+        }
+        setFieldErrors(flat);
+      } else {
+        showToast(data?.error || "Ошибка сохранения", "error");
+      }
+    }
   };
 
   return (
@@ -56,20 +70,22 @@ export default function FeatureForm({ feature, onSuccess, onCancel }: Props) {
         <label className="block text-sm font-medium">Заголовок</label>
         <input
           required
-          className="mt-1 w-full rounded border px-3 py-2"
+          className={`mt-1 w-full rounded border px-3 py-2 ${fieldErrors.title ? "border-red-500" : ""}`}
           value={form.title}
           onChange={(e) => setForm({ ...form, title: e.target.value })}
         />
+        {fieldErrors.title && <p className="mt-1 text-sm text-red-600">{fieldErrors.title}</p>}
       </div>
       <div>
         <label className="block text-sm font-medium">Описание</label>
         <textarea
           required
           rows={3}
-          className="mt-1 w-full rounded border px-3 py-2"
+          className={`mt-1 w-full rounded border px-3 py-2 ${fieldErrors.description ? "border-red-500" : ""}`}
           value={form.description}
           onChange={(e) => setForm({ ...form, description: e.target.value })}
         />
+        {fieldErrors.description && <p className="mt-1 text-sm text-red-600">{fieldErrors.description}</p>}
       </div>
       <div>
         <label className="block text-sm font-medium">Изображение / видео URL</label>
@@ -78,6 +94,7 @@ export default function FeatureForm({ feature, onSuccess, onCancel }: Props) {
           value={form.mediaUrl}
           onChange={(e) => setForm({ ...form, mediaUrl: e.target.value })}
         />
+        <ImagePreview src={form.mediaUrl} className="mt-2" />
       </div>
       <div>
         <label className="block text-sm font-medium">Sort order</label>

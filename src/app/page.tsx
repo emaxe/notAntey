@@ -86,7 +86,7 @@ export default function HomePage() {
             <div className="flex flex-wrap gap-sm justify-center">
               <a
                 href="tel:+74951234567"
-                className="inline-flex items-center gap-xs bg-[var(--color-primary)] px-xl py-sm text-button-md font-medium text-white transition hover:bg-[var(--color-primary-active)] hover:shadow-md"
+                className="inline-flex items-center gap-xs bg-[var(--color-primary)] rounded-[var(--radius-lg)] px-xl py-sm text-button-md font-medium text-white transition hover:bg-[var(--color-primary-active)] hover:shadow-md"
               >
                 <Phone size={18} />
                 Позвонить
@@ -95,7 +95,7 @@ export default function HomePage() {
                 href="https://t.me/max_username"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-xs border border-[var(--color-ink)] bg-[var(--color-canvas)] px-xl py-sm text-button-md font-medium text-[var(--color-ink)] transition hover:bg-[var(--color-surface-soft)] group"
+                className="inline-flex items-center gap-xs border border-[var(--color-ink)] bg-[var(--color-canvas)] rounded-[var(--radius-lg)] px-xl py-sm text-button-md font-medium text-[var(--color-ink)] transition hover:bg-[var(--color-surface-soft)] group"
               >
                 <MessageCircle size={18} />
                 Написать в Telegram

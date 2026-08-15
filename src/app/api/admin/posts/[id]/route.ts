@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import DOMPurify from "isomorphic-dompurify";
 import { prisma } from "@/lib/prisma";
 import { auth } from "@/auth";
 import { revalidatePath } from "next/cache";
@@ -23,9 +24,12 @@ export async function PUT(request: Request, { params }: Params) {
     }
     const { title, slug, excerpt, content, images, source } = parsed.data;
 
+    const sanitizedContent = typeof content === "string" ? DOMPurify.sanitize(content) : content;
+    const sanitizedExcerpt = typeof excerpt === "string" ? DOMPurify.sanitize(excerpt) : excerpt;
+
     const post = await prisma.post.update({
       where: { id },
-      data: { title, slug, excerpt, content, images, source },
+      data: { title, slug, excerpt: sanitizedExcerpt, content: sanitizedContent, images, source },
     });
 
     revalidatePath("/");

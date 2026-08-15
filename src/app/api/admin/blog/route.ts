@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import DOMPurify from "isomorphic-dompurify";
 import { prisma } from "@/lib/prisma";
 import { auth } from "@/auth";
 import { revalidatePath } from "next/cache";
@@ -31,12 +32,15 @@ export async function POST(request: Request) {
     }
     const { title, slug, excerpt, content, coverImage, images, published } = parsed.data;
 
+    const sanitizedContent = typeof content === "string" ? DOMPurify.sanitize(content) : content;
+    const sanitizedExcerpt = typeof excerpt === "string" ? DOMPurify.sanitize(excerpt) : excerpt;
+
     const post = await prisma.blogPost.create({
       data: {
         title,
         slug,
-        excerpt,
-        content,
+        excerpt: sanitizedExcerpt,
+        content: sanitizedContent,
         coverImage,
         images: images || [],
         published: published ?? false,

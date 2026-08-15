@@ -40,7 +40,7 @@ export default async function CertificatesPage() {
         Наши сертификаты
       </h1>
       <OrnamentalDivider className="mb-8 justify-start" />
-      <p className="mb-12 max-w-2xl text-lg text-[var(--color-muted)] leading-relaxed">
+      <p className="vintage-text-block mb-12 max-w-2xl text-lg text-[var(--color-muted)] leading-relaxed">
         Мы работаем только официально. Все инженеры сертифицированы производителями
         и проходят ежегодное обучение. Это значит, что ваши гарантии остаются в силе.
       </p>
@@ -49,7 +49,7 @@ export default async function CertificatesPage() {
         {certificates.map((cert: any) => (
           <article
             key={cert.id}
-            className="group flex flex-col overflow-hidden border border-[var(--color-hairline)] bg-[var(--color-surface-card)] transition-all duration-300 hover:border-[var(--color-primary)]/40"
+            className="group flex flex-col overflow-hidden border border-[var(--color-hairline)] bg-[var(--color-surface-card)] rounded-[var(--radius-md)] transition-all duration-300 hover:border-[var(--color-primary)]/40"
           >
             <div className="relative aspect-[4/3] overflow-hidden">
               {cert.imageUrl ? (

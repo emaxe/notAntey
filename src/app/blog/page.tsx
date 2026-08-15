@@ -41,7 +41,7 @@ export default async function BlogPage() {
         Блог
       </h1>
       <OrnamentalDivider className="mb-8 justify-start" />
-      <p className="mb-12 max-w-2xl text-lg text-[var(--color-muted)] leading-relaxed">
+      <p className="vintage-text-block mb-12 max-w-2xl text-lg text-[var(--color-muted)] leading-relaxed">
         Полезные статьи, советы по ремонту техники, обзоры и новости из мира IT.
       </p>
 

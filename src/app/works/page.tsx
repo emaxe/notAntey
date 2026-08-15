@@ -41,7 +41,7 @@ export default async function WorksPage() {
         Наши работы
       </h1>
       <OrnamentalDivider className="mb-8 justify-start" />
-      <p className="mb-12 max-w-2xl text-lg text-[var(--color-muted)] leading-relaxed">
+      <p className="vintage-text-block mb-12 max-w-2xl text-lg text-[var(--color-muted)] leading-relaxed">
         Реальные кейсы — от замены матрицы MacBook до спасения ноутбука после залития.
         Каждый проект с фото, описанием и сроками.
       </p>
@@ -50,7 +50,7 @@ export default async function WorksPage() {
         {works.map((work: any) => (
           <article
             key={work.id}
-            className="group flex flex-col overflow-hidden border border-[var(--color-hairline)] bg-[var(--color-surface-card)] transition-all duration-300 hover:border-[var(--color-primary)]/40"
+            className="group flex flex-col overflow-hidden border border-[var(--color-hairline)] bg-[var(--color-surface-card)] rounded-[var(--radius-md)] transition-all duration-300 hover:border-[var(--color-primary)]/40"
           >
             <div className="relative aspect-[4/3] overflow-hidden">
               {work.images?.[0] ? (

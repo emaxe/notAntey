@@ -111,7 +111,7 @@ export function Header() {
           <button
             type="button"
             onClick={() => setMobileOpen((v) => !v)}
-            className="lg:hidden relative z-50 inline-flex h-10 w-10 items-center justify-center border border-[var(--color-hairline)] bg-[var(--color-surface-card)] active:bg-[var(--color-surface-soft)] cursor-pointer select-none touch-manipulation"
+            className="lg:hidden relative z-50 inline-flex h-10 w-10 items-center justify-center border border-[var(--color-hairline)] bg-[var(--color-surface-card)] rounded-[var(--radius-sm)] active:bg-[var(--color-surface-soft)] cursor-pointer select-none touch-manipulation"
             aria-label={mobileOpen ? "Закрыть меню" : "Открыть меню"}
             aria-expanded={mobileOpen}
           >
@@ -144,7 +144,7 @@ export function Header() {
             <div className="mt-3 flex flex-col gap-2 border-t border-[var(--color-hairline-soft)] pt-3">
               <a
                 href="tel:+74951234567"
-                className="inline-flex items-center gap-2 border border-[var(--color-hairline)] px-4 py-3 text-sm font-medium text-[var(--color-body)] justify-center hover:bg-[var(--color-surface-soft)]"
+                className="inline-flex items-center gap-2 border border-[var(--color-hairline)] rounded-[var(--radius-sm)] px-4 py-3 text-sm font-medium text-[var(--color-body)] justify-center hover:bg-[var(--color-surface-soft)]"
               >
                 <Phone className="h-4 w-4 text-[var(--color-primary)]" />
                 +7 (495) 123-45-67

@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
@@ -14,6 +15,8 @@ import {
   LogOut,
   Home,
   Wrench,
+  Menu,
+  X,
 } from "lucide-react";
 
 const navItems = [
@@ -33,6 +36,7 @@ export default function AdminShell({
   userEmail: string;
 }) {
   const pathname = usePathname();
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const pageTitle =
     navItems.find((item) => item.href === pathname)?.label || "Админ-панель";
@@ -43,14 +47,39 @@ export default function AdminShell({
 
   return (
     <div className="min-h-screen bg-zinc-50 flex">
+      {/* Backdrop overlay for mobile */}
+      {mobileOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-30 lg:hidden"
+          onClick={() => setMobileOpen(false)}
+        />
+      )}
+
       {/* Sidebar */}
-      <aside className="w-64 bg-zinc-900 text-zinc-300 flex flex-col fixed inset-y-0 left-0 z-30">
+      <aside
+        className={cn(
+          "w-64 bg-zinc-900 text-zinc-300 flex flex-col fixed inset-y-0 left-0 z-40",
+          "transition-transform duration-300 ease-in-out",
+          mobileOpen ? "translate-x-0" : "-translate-x-full",
+          "lg:translate-x-0"
+        )}
+      >
         {/* Logo */}
-        <div className="h-16 flex items-center gap-3 px-6 border-b border-zinc-800">
-          <div className="flex h-8 w-8 items-center justify-center rounded bg-rose-600 text-white">
-            <Wrench className="h-4 w-4" />
+        <div className="h-16 flex items-center justify-between gap-3 px-6 border-b border-zinc-800">
+          <div className="flex items-center gap-3">
+            <div className="flex h-8 w-8 items-center justify-center rounded bg-rose-600 text-white">
+              <Wrench className="h-4 w-4" />
+            </div>
+            <span className="font-semibold text-white">Админка</span>
           </div>
-          <span className="font-semibold text-white">Админка</span>
+          {/* Close button — only visible on mobile */}
+          <button
+            onClick={() => setMobileOpen(false)}
+            className="lg:hidden text-zinc-400 hover:text-white transition"
+            aria-label="Закрыть меню"
+          >
+            <X className="h-5 w-5" />
+          </button>
         </div>
 
         {/* Navigation */}
@@ -62,6 +91,7 @@ export default function AdminShell({
               <Link
                 key={item.href}
                 href={item.href}
+                onClick={() => setMobileOpen(false)}
                 className={cn(
                   "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition",
                   active
@@ -80,6 +110,7 @@ export default function AdminShell({
         <div className="border-t border-zinc-800 p-3 space-y-1">
           <Link
             href="/"
+            onClick={() => setMobileOpen(false)}
             className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition hover:bg-zinc-800 hover:text-white"
           >
             <Home className="h-5 w-5 shrink-0" />
@@ -96,10 +127,20 @@ export default function AdminShell({
       </aside>
 
       {/* Main content */}
-      <main className="flex-1 ml-64">
+      <main className="flex-1 lg:ml-64">
         {/* Header */}
-        <div className="h-16 bg-white border-b border-zinc-200 flex items-center justify-between px-8 sticky top-0 z-20">
-          <h2 className="text-lg font-semibold text-zinc-800">{pageTitle}</h2>
+        <div className="h-16 bg-white border-b border-zinc-200 flex items-center justify-between px-4 sm:px-8 sticky top-0 z-20">
+          <div className="flex items-center gap-3">
+            {/* Hamburger — mobile only */}
+            <button
+              onClick={() => setMobileOpen(true)}
+              className="lg:hidden text-zinc-600 hover:text-zinc-900 transition"
+              aria-label="Открыть меню"
+            >
+              <Menu className="h-6 w-6" />
+            </button>
+            <h2 className="text-lg font-semibold text-zinc-800">{pageTitle}</h2>
+          </div>
           <div className="flex items-center gap-3">
             <span className="text-sm text-zinc-500 hidden sm:inline">
               {userEmail}
@@ -111,7 +152,7 @@ export default function AdminShell({
         </div>
 
         {/* Page content */}
-        <div className="p-8">{children}</div>
+        <div className="p-4 sm:p-8">{children}</div>
       </main>
     </div>
   );

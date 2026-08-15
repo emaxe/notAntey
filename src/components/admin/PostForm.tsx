@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useToast } from "./Toast";
+import ImagePreview from "./ImagePreview";
 
 interface Post {
   id?: string;
@@ -33,10 +34,11 @@ export default function PostForm({ post, onSuccess, onCancel }: Props) {
     (post?.images || []).join("\n")
   );
   const [saving, setSaving] = useState(false);
-
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSaving(true);
+    setFieldErrors({});
     const payload = {
       ...form,
       images: imagesInput
@@ -52,8 +54,17 @@ export default function PostForm({ post, onSuccess, onCancel }: Props) {
       body: JSON.stringify(payload),
     });
     setSaving(false);
-    if (res.ok) { onSuccess(); showToast("Сохранено", "success"); }
-    else showToast("Ошибка сохранения", "error");
+    if (res.ok) {
+      onSuccess();
+      showToast("Сохранено", "success");
+    } else {
+      const data = await res.json();
+      if (data.error && typeof data.error === "object" && data.error.fieldErrors) {
+        setFieldErrors(data.error.fieldErrors);
+      } else {
+        showToast(typeof data.error === "string" ? data.error : "Ошибка сохранения", "error");
+      }
+    }
   };
 
   return (
@@ -66,6 +77,7 @@ export default function PostForm({ post, onSuccess, onCancel }: Props) {
           value={form.title}
           onChange={(e) => setForm({ ...form, title: e.target.value })}
         />
+        {fieldErrors.title && <p className="text-sm text-red-600 mt-1">{fieldErrors.title}</p>}
       </div>
       <div>
         <label className="block text-sm font-medium">Slug</label>
@@ -75,6 +87,7 @@ export default function PostForm({ post, onSuccess, onCancel }: Props) {
           value={form.slug}
           onChange={(e) => setForm({ ...form, slug: e.target.value })}
         />
+        {fieldErrors.slug && <p className="text-sm text-red-600 mt-1">{fieldErrors.slug}</p>}
       </div>
       <div>
         <label className="block text-sm font-medium">Краткое описание</label>
@@ -85,6 +98,7 @@ export default function PostForm({ post, onSuccess, onCancel }: Props) {
           value={form.excerpt}
           onChange={(e) => setForm({ ...form, excerpt: e.target.value })}
         />
+        {fieldErrors.excerpt && <p className="text-sm text-red-600 mt-1">{fieldErrors.excerpt}</p>}
       </div>
       <div>
         <label className="block text-sm font-medium">Контент (HTML)</label>
@@ -95,6 +109,7 @@ export default function PostForm({ post, onSuccess, onCancel }: Props) {
           value={form.content}
           onChange={(e) => setForm({ ...form, content: e.target.value })}
         />
+        {fieldErrors.content && <p className="text-sm text-red-600 mt-1">{fieldErrors.content}</p>}
       </div>
       <div>
         <label className="block text-sm font-medium">Изображения (по одному на строку)</label>
@@ -104,6 +119,19 @@ export default function PostForm({ post, onSuccess, onCancel }: Props) {
           value={imagesInput}
           onChange={(e) => setImagesInput(e.target.value)}
         />
+        {imagesInput && (
+          <div className="mt-2 flex flex-wrap gap-2">
+            {imagesInput
+              .split("\n")
+              .map((s) => s.trim())
+              .filter(Boolean)
+              .slice(0, 4)
+              .map((url, i) => (
+                <ImagePreview key={i} src={url} className="h-20 w-28" />
+              ))}
+          </div>
+        )}
+        {fieldErrors.images && <p className="text-sm text-red-600 mt-1">{fieldErrors.images}</p>}
       </div>
       <div>
         <label className="block text-sm font-medium">Источник</label>
@@ -112,6 +140,7 @@ export default function PostForm({ post, onSuccess, onCancel }: Props) {
           value={form.source}
           onChange={(e) => setForm({ ...form, source: e.target.value })}
         />
+        {fieldErrors.source && <p className="text-sm text-red-600 mt-1">{fieldErrors.source}</p>}
       </div>
       <div className="flex gap-2">
         <button

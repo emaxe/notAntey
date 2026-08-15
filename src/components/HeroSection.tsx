@@ -9,7 +9,7 @@ export default function HeroSection() {
       <div className="relative mx-auto max-w-container-lg">
         <div className="flex flex-col items-center gap-lg md:w-2/3 lg:w-3/5 mx-auto text-center">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 border border-[var(--color-hairline)] bg-[var(--color-surface-card)] px-4 py-1.5 text-sm font-semibold text-[var(--color-primary)]">
+          <div className="inline-flex items-center gap-2 border border-[var(--color-hairline)] bg-[var(--color-surface-card)] rounded-[var(--radius-sm)] px-4 py-1.5 text-sm font-semibold text-[var(--color-primary)]">
             <ShieldCheck className="h-4 w-4" />
             Гарантия до 12 месяцев
           </div>
@@ -32,7 +32,7 @@ export default function HeroSection() {
           <div className="flex flex-wrap gap-sm justify-center">
             <a
               href="tel:+71234567890"
-              className="inline-flex items-center gap-xs bg-[var(--color-primary)] px-xl py-sm text-button-md font-medium text-white transition hover:bg-[var(--color-primary-active)] hover:shadow-md"
+              className="inline-flex items-center gap-xs bg-[var(--color-primary)] rounded-[var(--radius-lg)] px-xl py-sm text-button-md font-medium text-white transition hover:bg-[var(--color-primary-active)] hover:shadow-md"
               data-testid="hero-call-button"
             >
               <Phone size={18} />
@@ -42,7 +42,7 @@ export default function HeroSection() {
               href="https://t.me/username"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-xs border border-[var(--color-ink)] bg-[var(--color-canvas)] px-xl py-sm text-button-md font-medium text-[var(--color-ink)] transition hover:bg-[var(--color-surface-soft)] group"
+              className="inline-flex items-center gap-xs border border-[var(--color-ink)] bg-[var(--color-canvas)] rounded-[var(--radius-lg)] px-xl py-sm text-button-md font-medium text-[var(--color-ink)] transition hover:bg-[var(--color-surface-soft)] group"
             >
               <MessageCircle size={18} />
               Написать в Telegram

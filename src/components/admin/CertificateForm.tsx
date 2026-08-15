@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useToast } from "./Toast";
+import ImagePreview from "./ImagePreview";
 
 interface Certificate {
   id?: string;
@@ -22,13 +23,15 @@ export default function CertificateForm({ certificate, onSuccess, onCancel }: Pr
     imageUrl: certificate?.imageUrl || "",
   });
   const [saving, setSaving] = useState(false);
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setFieldErrors({});
     setSaving(true);
     const payload = {
       title: form.title,
-      image: form.imageUrl,
+      imageUrl: form.imageUrl,
     };
     const url = certificate?.id
       ? `/api/admin/certificates/${certificate.id}`
@@ -41,7 +44,18 @@ export default function CertificateForm({ certificate, onSuccess, onCancel }: Pr
     });
     setSaving(false);
     if (res.ok) { onSuccess(); showToast("Сохранено", "success"); }
-    else showToast("Ошибка сохранения", "error");
+    else {
+      const data = await res.json().catch(() => ({}));
+      if (data?.error?.fieldErrors) {
+        const flat: Record<string, string> = {};
+        for (const [k, v] of Object.entries(data.error.fieldErrors)) {
+          flat[k] = Array.isArray(v) ? v[0] : String(v);
+        }
+        setFieldErrors(flat);
+      } else {
+        showToast(data?.error || "Ошибка сохранения", "error");
+      }
+    }
   };
 
   return (
@@ -50,18 +64,21 @@ export default function CertificateForm({ certificate, onSuccess, onCancel }: Pr
         <label className="block text-sm font-medium">Заголовок</label>
         <input
           required
-          className="mt-1 w-full rounded border px-3 py-2"
+          className={`mt-1 w-full rounded border px-3 py-2 ${fieldErrors.title ? "border-red-500" : ""}`}
           value={form.title}
           onChange={(e) => setForm({ ...form, title: e.target.value })}
         />
+        {fieldErrors.title && <p className="mt-1 text-sm text-red-600">{fieldErrors.title}</p>}
       </div>
       <div>
         <label className="block text-sm font-medium">URL изображения</label>
         <input
-          className="mt-1 w-full rounded border px-3 py-2"
+          className={`mt-1 w-full rounded border px-3 py-2 ${fieldErrors.imageUrl ? "border-red-500" : ""}`}
           value={form.imageUrl}
           onChange={(e) => setForm({ ...form, imageUrl: e.target.value })}
         />
+        {fieldErrors.imageUrl && <p className="mt-1 text-sm text-red-600">{fieldErrors.imageUrl}</p>}
+        <ImagePreview src={form.imageUrl} className="mt-2" />
       </div>
       <div className="flex gap-2">
         <button
